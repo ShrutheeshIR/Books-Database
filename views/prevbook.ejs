@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.4/css/bootstrap-theme.min.css"> -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+
+
+</head>
+  <body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Books Catalogue</a>
+          </div>
+        </div>
+      </nav>
+  
+      <div class="container">
+        <div class="row">
+          <form  id="bookform">
+          <input type="text" class="form-control" name="bookName" value=<%= bookObj.book_name %> placeholder="Name of Book"/>
+          <input type="text" class="form-control" name="authorFirstName" placeholder="First Name of Author" value=<%= bookObj.author_first_name ? bookObj.author_first_name  : "-" %> />
+          <input type="text" class="form-control" name="authorLastName" placeholder="Last Name of Author" value=<%= bookObj.author_last_name ? bookObj.author_last_name  : "-" %> />
+          
+          <label for="type">Fiction/Non-Fiction:</label>
+          <select name="type" id="type">
+            <% { %>
+                <%  var is_select = (bookObj.type == 'fiction') ? "selected":"";  %>
+                <option value="fiction" <%= is_select %> > Fiction  </option>
+            <%} %>
+
+            <% { %>
+                <%  var is_select = (bookObj.type == 'nonfiction') ? "selected":"";  %>
+                <option value="nonfiction" <%= is_select %> > Non-Fiction  </option>
+            <%} %>
+          </select>
+          <br> 
+
+          <label for="lang">Select language:</label>
+          <select name="lang" id="lang">
+            <option value="tamil" <%= (bookObj.language == 'tamil') ? "selected":""; %> >Tamil</option>
+            <option value="english" <%= (bookObj.language == 'english') ? "selected":""; %> >English</option>
+            <option value="hindi" <%= (bookObj.language == 'hindi') ? "selected":""; %> >Hindi</option>
+            <option value="sanskrit" <%= (bookObj.language == 'sanskrit') ? "selected":""; %> >Sanskrit</option>
+            <option value="other" <%= (bookObj.language == 'other') ? "selected":""; %> >Other</option>
+          </select>
+          <br> 
+
+          <label for="genres">Select Genres:</label>
+          <input type="hidden" name="genre" />
+          <select name ="genres" id="genres" multiple="multiple" onchange="DropDownChanged(this);">
+            <% for(var i = 0; i <genres.length; i++){%>
+              <option id=<%= genres[i].genre_id %> value=<%= genres[i].genre_id %> <%= (bookObj.genres.includes(genres[i].genre)) ? "selected":""; %> ><%= genres[i].genre %></option>
+            <%} %>
+            <option id="other" value=-1>Other..</option>
+          </select>
+        <input type="text" name="genres_extra" style="display: none;" placeholder="Enter genres comma separated with space" />
+
+
+            <br> 
+          <label for="seriesName">Series Name:</label>
+          <input type="text" class="form-control" name="seriesName" value=<%= bookObj.series_name ? bookObj.series_name  : "-" %> placeholder="seriesname"/>
+          
+          <label for="seriesName">Book Number in the Series:</label>
+          <input type="number" class="form-control" name="seriesNo" value=<%= bookObj.series_no %> placeholder="Book Number in the Series"/>
+
+          <label for="year">Year of Purchase:</label>
+          <input type="number" class="form-control" name="year" value=<%= bookObj.year %> placeholder="Year of Publication"/>
+
+          <label for="pages">Pages:</label>
+          <input type="number" class="form-control" name="pages" value=<%= bookObj.pages %> placeholder="Number of pages in the book"/>
+
+          <label for="duplicate">Original/Duplicate:</label>
+          <select name="duplicate" id="duplicate">
+            <% { %>
+                <%  var is_select = (bookObj.duplicate == false) ? "selected":"";  %>
+                <option value="FALSE" <%= is_select %> > Original  </option>
+            <%} %>
+
+            <% { %>
+                <%  var is_select = (bookObj.duplicate == true) ? "selected":"";  %>
+                <option value="TRUE" <%= is_select %> > Duplicate  </option>
+            <%} %>
+          </select>
+          <br> 
+
+          <input type="text" class="form-control" name="photo" value="" placeholder="PhotoPath"/>
+
+          <textarea rows="4" cols="50" name="comments" form="bookform" > <%= bookObj.comments %></textarea>
+
+          <button type="submit" class="btn btn-md btn-default" formaction="/updateBook" formmethod="post" >
+            Update
+          </button>
+
+          <button type="submit" class="btn btn-md btn-default" formaction="/" formmethod="GET" >
+            Continue
+          </button>
+
+          <button type="submit" class="btn btn-md btn-default" formaction="/removeBook" formmethod="post" >
+            Remove
+          </button>
+
+      </form>
+    
+    </div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+     
+    <!-- Include the plugin's CSS and JS: -->
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
+
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('#genres').multiselect();
+      });
+      
+  </script>
+  <script>
+    function DropDownChanged(oDDL) {
+        var oTextbox = oDDL.form.elements["genres_extra"];
+        if( document.getElementById('other').selected){
+          oTextbox.style.display = "";
+        }
+        else
+          oTextbox.style.display = "none";
+        oTextbox.focus();
+    }  
+  </script>    
+
+  </body>
+</html>

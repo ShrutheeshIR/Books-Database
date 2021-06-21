@@ -1,0 +1,935 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: bookgenres; Type: TABLE; Schema: public; Owner: books_user
+--
+
+CREATE TABLE public.bookgenres (
+    book_id integer NOT NULL,
+    genre_id integer NOT NULL
+);
+
+
+ALTER TABLE public.bookgenres OWNER TO books_user;
+
+--
+-- Name: bookgenres_book_id_seq; Type: SEQUENCE; Schema: public; Owner: books_user
+--
+
+CREATE SEQUENCE public.bookgenres_book_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.bookgenres_book_id_seq OWNER TO books_user;
+
+--
+-- Name: bookgenres_book_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: books_user
+--
+
+ALTER SEQUENCE public.bookgenres_book_id_seq OWNED BY public.bookgenres.book_id;
+
+
+--
+-- Name: bookgenres_genre_id_seq; Type: SEQUENCE; Schema: public; Owner: books_user
+--
+
+CREATE SEQUENCE public.bookgenres_genre_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.bookgenres_genre_id_seq OWNER TO books_user;
+
+--
+-- Name: bookgenres_genre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: books_user
+--
+
+ALTER SEQUENCE public.bookgenres_genre_id_seq OWNED BY public.bookgenres.genre_id;
+
+
+--
+-- Name: books; Type: TABLE; Schema: public; Owner: books_user
+--
+
+CREATE TABLE public.books (
+    book_id integer NOT NULL,
+    book_name character varying(200) NOT NULL,
+    author_first_name character varying(100),
+    author_last_name character varying(100),
+    type character varying(15),
+    series_name character varying(200),
+    language character varying(20),
+    series_no smallint,
+    year integer,
+    pages integer,
+    duplicate boolean,
+    photo character varying(260),
+    comments character varying(1000)
+);
+
+
+ALTER TABLE public.books OWNER TO books_user;
+
+--
+-- Name: books_book_id_seq; Type: SEQUENCE; Schema: public; Owner: books_user
+--
+
+CREATE SEQUENCE public.books_book_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_book_id_seq OWNER TO books_user;
+
+--
+-- Name: books_book_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: books_user
+--
+
+ALTER SEQUENCE public.books_book_id_seq OWNED BY public.books.book_id;
+
+
+--
+-- Name: genres; Type: TABLE; Schema: public; Owner: books_user
+--
+
+CREATE TABLE public.genres (
+    genre_id integer NOT NULL,
+    genre character varying(100)
+);
+
+
+ALTER TABLE public.genres OWNER TO books_user;
+
+--
+-- Name: genres_genre_id_seq; Type: SEQUENCE; Schema: public; Owner: books_user
+--
+
+CREATE SEQUENCE public.genres_genre_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.genres_genre_id_seq OWNER TO books_user;
+
+--
+-- Name: genres_genre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: books_user
+--
+
+ALTER SEQUENCE public.genres_genre_id_seq OWNED BY public.genres.genre_id;
+
+
+--
+-- Name: bookgenres book_id; Type: DEFAULT; Schema: public; Owner: books_user
+--
+
+ALTER TABLE ONLY public.bookgenres ALTER COLUMN book_id SET DEFAULT nextval('public.bookgenres_book_id_seq'::regclass);
+
+
+--
+-- Name: bookgenres genre_id; Type: DEFAULT; Schema: public; Owner: books_user
+--
+
+ALTER TABLE ONLY public.bookgenres ALTER COLUMN genre_id SET DEFAULT nextval('public.bookgenres_genre_id_seq'::regclass);
+
+
+--
+-- Name: books book_id; Type: DEFAULT; Schema: public; Owner: books_user
+--
+
+ALTER TABLE ONLY public.books ALTER COLUMN book_id SET DEFAULT nextval('public.books_book_id_seq'::regclass);
+
+
+--
+-- Name: genres genre_id; Type: DEFAULT; Schema: public; Owner: books_user
+--
+
+ALTER TABLE ONLY public.genres ALTER COLUMN genre_id SET DEFAULT nextval('public.genres_genre_id_seq'::regclass);
+
+
+--
+-- Data for Name: bookgenres; Type: TABLE DATA; Schema: public; Owner: books_user
+--
+
+COPY public.bookgenres (book_id, genre_id) FROM stdin;
+1	3
+2	3
+3	3
+4	3
+5	1
+5	2
+5	7
+6	1
+6	2
+6	7
+7	1
+7	2
+7	7
+8	1
+8	26
+9	1
+9	25
+10	2
+10	21
+11	2
+11	21
+12	1
+12	2
+12	7
+12	26
+13	1
+13	2
+13	7
+13	21
+13	26
+14	1
+14	2
+14	5
+14	27
+15	1
+15	2
+15	27
+16	1
+16	2
+16	26
+17	5
+17	22
+18	5
+18	22
+19	5
+20	5
+20	22
+20	27
+21	5
+21	16
+21	27
+22	5
+22	10
+22	3
+22	4
+23	3
+23	4
+24	3
+24	4
+25	1
+25	2
+25	5
+25	27
+26	1
+26	2
+26	7
+27	2
+27	27
+28	1
+28	2
+28	7
+28	9
+29	2
+29	5
+29	9
+29	20
+29	27
+30	1
+30	2
+30	5
+30	21
+31	2
+31	5
+32	2
+32	0
+33	19
+33	20
+34	12
+34	28
+35	12
+35	28
+38	4
+38	29
+39	1
+39	13
+40	13
+40	17
+40	18
+41	13
+41	19
+41	29
+42	13
+42	19
+43	5
+43	13
+44	13
+44	18
+45	13
+45	29
+46	1
+46	2
+46	7
+47	1
+47	2
+47	7
+48	1
+48	2
+48	7
+49	1
+49	2
+49	7
+50	1
+50	2
+50	7
+51	1
+51	2
+51	7
+36	28
+37	28
+52	18
+53	18
+54	18
+55	18
+56	18
+57	18
+58	18
+59	18
+60	18
+61	18
+62	18
+63	18
+64	18
+65	18
+66	18
+67	18
+68	18
+69	18
+70	18
+71	6
+71	13
+71	29
+72	29
+73	29
+74	14
+75	1
+75	2
+76	1
+76	2
+77	1
+77	2
+78	1
+78	2
+79	4
+80	4
+81	4
+82	4
+83	4
+83	2
+84	2
+85	5
+85	22
+86	5
+86	22
+87	5
+87	22
+88	2
+89	29
+90	29
+91	8
+91	18
+92	18
+93	8
+93	17
+93	18
+94	1
+94	2
+94	8
+95	8
+95	18
+96	2
+96	18
+97	1
+97	2
+98	1
+98	2
+99	1
+99	2
+100	2
+101	2
+101	7
+102	1
+102	2
+102	7
+103	1
+103	2
+104	1
+104	2
+105	2
+105	15
+105	27
+106	1
+106	2
+106	30
+107	1
+107	2
+107	15
+107	16
+107	30
+108	2
+108	27
+108	30
+109	2
+109	27
+110	2
+110	27
+111	1
+111	2
+111	7
+112	1
+112	2
+112	7
+113	1
+113	2
+113	7
+114	1
+114	2
+114	7
+115	1
+115	2
+115	7
+116	2
+116	27
+117	2
+117	27
+118	2
+118	27
+119	2
+120	1
+120	2
+120	9
+121	1
+121	2
+121	9
+122	1
+122	2
+122	9
+123	2
+123	7
+124	2
+124	7
+125	2
+125	7
+126	1
+126	2
+126	6
+127	24
+127	1
+127	2
+128	1
+128	2
+129	1
+129	2
+129	7
+130	1
+130	2
+131	1
+131	2
+132	1
+132	2
+133	1
+133	2
+133	16
+133	29
+134	29
+134	1
+135	1
+136	1
+137	1
+138	1
+139	1
+140	1
+141	1
+142	1
+142	2
+143	1
+143	2
+144	2
+144	7
+144	16
+145	1
+145	2
+145	8
+146	29
+147	4
+147	21
+148	3
+149	3
+149	5
+150	5
+150	18
+151	18
+151	29
+152	29
+153	5
+154	2
+155	2
+156	1
+156	2
+157	1
+157	2
+157	7
+157	3
+157	19
+158	3
+158	19
+158	29
+159	29
+159	1
+159	2
+160	1
+160	2
+161	3
+161	18
+161	1
+161	2
+161	7
+162	1
+162	2
+162	7
+163	2
+163	8
+164	3
+165	3
+166	3
+167	3
+167	6
+167	18
+168	17
+168	18
+168	19
+169	-1
+170	29
+171	21
+172	21
+173	21
+174	21
+175	21
+176	21
+177	21
+178	31
+179	31
+180	5
+181	5
+182	1
+183	32
+184	32
+185	32
+186	32
+187	32
+188	32
+189	32
+190	32
+190	9
+191	9
+192	9
+193	9
+194	32
+195	29
+196	9
+197	33
+198	31
+198	33
+199	33
+200	4
+200	31
+201	31
+202	31
+203	31
+204	31
+204	33
+205	29
+206	29
+207	32
+208	32
+209	18
+209	32
+210	32
+211	32
+212	3
+213	32
+214	1
+214	2
+214	7
+215	1
+215	2
+215	7
+216	1
+216	2
+216	7
+217	1
+217	2
+217	7
+218	1
+218	2
+218	7
+219	1
+219	2
+219	7
+\.
+
+
+--
+-- Data for Name: books; Type: TABLE DATA; Schema: public; Owner: books_user
+--
+
+COPY public.books (book_id, book_name, author_first_name, author_last_name, type, series_name, language, series_no, year, pages, duplicate, photo, comments) FROM stdin;
+1	The Fellowship of the Ring	JRR	Tolkien	fiction	Lord of the Rings	english	1	2018	529	f		
+2	The Two Towers	JRR	Tolkien	fiction	Lord of the Rings	english	2	2018	442	f		
+3	The Return of the King	JRR	Tolkien	fiction	Lord of the Rings	english	3	2018	555	f		
+4	The Silmarillion	JRR	Tolkien	fiction		english	-1	2018	443	f		
+5	After the Crash	Michel	Bussi	fiction		english	-1	2016	386	f		
+6	Black Water Lilies	Michel	Bussi	fiction		english	-1	2017	350	f		
+7	Dont Let Go	Michel	Bussi	fiction		english	-1	2018	324	f		
+8	Complete Works of Sherlock Holmes 1	Arthur Conan	Doyle	fiction	Sherlock Holmes	english	1	2012	1032	f		
+9	Complete Works of Sherlock Holmes 2	Arthur Conan	Doyle	fiction	Sherlock Holmes	english	2	2012	728	f		
+10	Pompeii	Robert	Harris	fiction		english	-1	2017	397	f		
+11	Imperium	Robert	Harris	fiction		english	-1	2017	480	f		
+12	Angels and Demons	Dan	Brown	fiction		english	-1	2011	-1	f		
+13	The Da Vinci Code	Dan	Brown	fiction		english	-1	-1	489	f		
+14	Deception Point	Dan	Brown	fiction		english	-1	-1	585	f		
+15	Digital Fortress	Dan	Brown	fiction		english	-1	-1	509	f		
+16	Inferno	Dan	Brown	fiction		english	-1	-1	461	f		
+17	Foundation and Empire	Isaac	Asimov	fiction	Foundation	english	2	2011	282	f		
+18	Second Foundation	Isaac	Asimov	fiction	Foundation	english	3	-1	191	f		
+19	The Stars, Like Dust	Isaac	Asimov	fiction	Galactic Empire	english	1	2012	231	f		
+20	Nemesis	Isaac	Asimov	fiction		english	-1	2011	384	f		
+21	Fantastic Voyage	Isaac	Asimov	fiction		english	-1	2010	202	f		
+22	The Ultimate Hitchhikers Guide to the Galaxy	Douglas	Adams	fiction	The Hitchhikers Guide to the Galaxy	english	0	2018	818	f		
+23	The Blood of Olympus	Rick	Riordan	fiction	Heroes of Olympus	english	5	2014	577	f		
+24	The Hammer of Thor	Rick	Riordan	fiction	Magnus Chase	english	2	-1	496	f		
+25	Sphere	Michael	Crichton	fiction		english	-1	2014	371	f		
+26	The Great Train Robbery	Michael	Crichton	fiction		english	-1	2016	281	f		
+27	Airframe	Michael	Crichton	fiction		english	-1	2018	352	f		
+28	A Case of Need	Michael	Crichton	fiction		english	-1	2011	408	f		
+29	Next	Michael	Crichton	fiction		english	-1	2012	431	f		
+30	Timeline	Michael	Crichton	fiction		english	-1	2014	496	f		
+31	Jurassic Park	Michael	Crichton	fiction		english	-1	2011	399	f		
+32	1984	George	Orwell	fiction		english	-1	2018	328	f		
+33	The Giver	Lois	Lowry	fiction		english	-1	-1	223	f		
+34	Great Works of Franz Kafka	Franz	Kafka	fiction		english	-1	2018	557	f		Many works of Kafka, short and long stories
+35	The Castle	Franz	Kafka	fiction		english	-1	2017	298	f		
+38	The Minotaur Takes a Cigarrete Break	Steven	Sherill	fiction		english	-1	-1	-1	f		
+39	The Strange Case of Dr Jekyll and Mr Hyde and Other Stories	RL	Stevenson	fiction		english	-1	2016	340	f		
+40	Frankenstein	Mary	Shelly	fiction		english	-1	2014	223	f		
+41	To Kill a Mockingbird	Harper	Lee	fiction		english	-1	-1	-1	f		
+42	To Kill a Mockingbird	Harper	Lee	fiction		english	-1	2018	309	f		
+43	Twenty Thousand Leagues Under the Sea	Jules	Verne	fiction		english	-1	2012	288	f		
+44	Dracula	Bram	Stoker	fiction		english	-1	2014	448	f		
+45	The Great Gatsby	F Scott	Fitzgerald	fiction		english	-1	2018	188	f		
+46	Bloodline	Sidney	Sheldon	fiction		english	-1	-1	460	f		
+47	A Stranger in the Mirror	Sidney	Sheldon	fiction		english	-1	-1	318	f		
+48	The Best Laid Plans	Sidney	Sheldon	fiction		english	-1	-1	358	f		
+49	Morning, Noon and Night	Sidney	Sheldon	fiction		english	-1	-1	388	f		First 6 pages along with intro missing
+50	The Other Side of Midnight	Sidney	Sheldon	fiction		english	-1	-1	462	f		
+51	If Tomorrow Comes	Sidney	Sheldon	fiction		english	-1	-1	408	f		
+52	The Horror Camp at Cam Jellyjam	RL	Stine	fiction	Goosebumps	english	-1	2011	128	f		
+53	Say Cheese and Die	RL	Stine	fiction	Goosebumps	english	-1	2011	132	f		
+54	Stay Out of the Basement	RL	Stine	fiction	Goosebumps	english	2	2011	122	f		
+55	Piano Lessons can be Murder	RL	Stine	fiction	Goosebumps	english	13	2011	124	f		
+56	Welcome to the Dead House	RL	Stine	fiction	Goosebumps	english	1	2011	123	f		
+57	Monster Blood	RL	Stine	fiction	Goosebumps	english	3	2011	128	f		
+58	Phantom of the Auditorium	RL	Stine	fiction	Goosebumps	english	24	2011	126	f		
+59	Revenge of the Lawn Gnomes	RL	Stine	fiction	Goosebumps	english	34	2011	119	f		
+36	Metamorphosis	Franz	Kafka	fiction		english	-1	-1	100	f		
+37	The Plague	Albert	Camus	fiction		english	-1	-1	186	f		
+60	Tick Tock, Youre Dead	RL	Stine	fiction	Goosebumps Choose	english	2	2010	135	f		
+61	Beware, The Snowman	RL	Stine	fiction	Goosebumps	english	51	2010	135	f		
+62	My Hairiest Adventure	RL	Stine	fiction	Goosebumps	english	26	2011	122	f		
+63	Attack of the Jack O Lanterns	RL	Stine	fiction	Goosebumps	english	48	2011	133	f		
+64	Bad Hare Day	RL	Stine	fiction	Goosebumps	english	41	2011	117	f		
+65	Deep Trouble II	RL	Stine	fiction	Goosebumps	english	58	2011	113	f		
+66	Series 2000	RL	Stine	fiction	Goosebumps	english	0	201	121	f		
+67	Deep Trouble I	RL	Stine	fiction	Goosebumps	english	19	2011	117	f		
+68	How I Learned to Fly	RL	Stine	fiction	Goosebumps	english	52	2011	123	f		
+69	Bad Hare Day	RL	Stine	fiction	Goosebumps	english	41	2011	117	t		
+70	Blind Date	RL	Stine	fiction		english	-1	2011	20	f		
+71	Pride and Prejudice	Jane	Austen	fiction		english	-1	-1	329	f		
+72	And the Mountains Echoed	Khaleed	Hosseini	fiction		english	-1	2018	402	f		
+73	A Man Called Ove	Fredrik	Backman	fiction		english	-1	-1	294	f		
+74	Kafka on the Shore	Haruki	Murakami	fiction		english	-1	2017	615	f		
+75	The Seven Dials Mystery	Agatha	Christie	fiction		english	-1	-1	217	f		Looks very old
+76	The Body in the Library	Agatha	Christie	fiction		english	-1	-1	189	f		Fragile
+77	Murder on the Orient Express	Agatha	Christie	fiction		english	-1	-1	233	f		
+78	The Hound of Death	Agatha	Christie	fiction		english	-1	-1	218	f		
+79	Kalki	Kevin	Missal	fiction	Dharmayoddha	english	1	-1	470	f		
+80	Scion of Ikshvaku	Amish	Tripathi	fiction	Ram Chandra	english	1	-1	354	f		
+81	The Secret of the Nagas	Amish	Tripathi	fiction	Shiva Trilogy	english	2	2011	396	f		
+82	The Oath of the Vayuputras	Amish	Tripathi	fiction	Shiva Trilogy	english	3	-1	575	f		
+83	The Oath of the Vayuputras	Amish	Tripathi	fiction	Shiva Trilogy	english	3	-1	575	t		
+84	The Sialkot Saga	Ashwin	Sanghi	fiction		english	-1	2016	583	f		
+85	The Dreaming Void	Peter F	Hamilton	fiction	The Void Trilogy	english	1	2014	795	f		
+86	The Temporal Void	Peter F	Hamilton	fiction	The Void Trilogy	english	2	2014	745	f		
+87	The Evolutionary Void	Peter F	Hamilton	fiction	The Void Trilogy	english	3	2014	725	f		
+88	Gold	Wilbur	Smith	fiction		english	-1	2012	253	f		
+89	The Eye of the Tiger and Golden Fox	Wilbur	Smith	fiction		english	-1	2011	575	f		2 books together
+90	The Sunbird	Wilbur	Smith	fiction		english	-1	2011	615	f		
+91	The Wasp Factory	Iain	Banks	fiction		english	-1	-1	184	f		
+92	Bag of Bones	Stephen	King	fiction		english	-1	2014	660	f		
+93	The Dark Half	Stephen	King	fiction		english	-1	2012	484	f		
+94	Blaze	Stephen	King	fiction		english	-1	2012	321	f		
+95	Desperation	Stephen	King	fiction		english	-1	2012	545	f		
+96	Just After Sunset	Stephen	King	fiction		english	-1	2012	545	f		
+97	Mystery Stories	Enid	Blyton	fiction		english	-1	-1	-1	f		Multiple Stories: Banshee Towers, Burnt Cottage and Disappearing Cat. Given by Yukta Mahendran
+98	The Mystery of the Burnt Cottage	Enid	Blyton	fiction		english	-1	2011	160	f		
+99	Adventure Stories	Enid	Blyton	fiction		english	-1	2010	387	f		Two books; The Valley of Adventure and The Sea of Adventure
+100	Caravan to Vaccares	Alistair	Maclean	fiction		english	-1	2018	287	f		
+101	Athabasca	Alistair	Maclean	fiction		english	-1	2018	252	f		
+102	Unaco	Alistair	Maclean	fiction		english	-1	2018	344	f		
+103	Bear Island	Alistair	Maclean	fiction		english	-1	2018	288	f		
+104	They Came to Baghdad	Agatha	Christie	fiction		english	-1	-1	233	f		
+105	The Cardinal of Kremlin	Tom	Clancy	fiction		english	-1	2012	547	f		
+106	Mission of Honor	Tom	Clancy	fiction		english	-1	2012	418	f		
+107	Mirror Image	Tom	Clancy	fiction		english	-1	2012	436	f		
+108	ruthless.com	Tom	Clancy	fiction	Powerplays	english	2	2014	353	f		
+109	State of War	Tom	Clancy	fiction	Net Force	english	7	-1	371	f		
+110	Night Moves	Tom	Clancy	fiction	Net Force	english	3	2015	469	f		
+111	Mary, Mary	James	Patterson	fiction	Alex Cross	english	11	2011	471	f		
+112	Cross Country	James	Patterson	fiction	Alex Cross	english	14	2015	425	f		
+113	Run for Your Life	James	Patterson	fiction	Michael Bennett	english	2	2012	387	f		
+114	Lifeguard	James	Patterson	fiction		english	-1	2011	402	f		
+115	Postcard Killers	James	Patterson	fiction		english	-1	2012	516	f		
+116	Sahara	Clive	Cussler	fiction	Dirk Pitt	english	11	2012	568	f		
+117	Shock Wave	Clive	Cussler	fiction	Dirk Pitt	english	13	2012	537	f		
+118	Flood Tide	Clive	Cussler	fiction	Dirk Pitt	english	14	2012	511	f		
+119	Spartan Gold	Clive	Cussler	fiction		english	-1	2012	503	f		With Grant Blackwood
+120	Critical Judgment	Michael	Palmer	fiction		english	-1	2015	448	f		
+121	Flash Back	Michael	Palmer	fiction		english	-1	-1	385	f		
+122	Miracle Cure	Michael	Palmer	fiction		english	-1	2010	424	f		
+123	Dead Souls	Ian	Rankin	fiction		english	-1	-1	482	f		
+124	A Question of Blood	Ian	Rankin	fiction		english	-1	-1	440	f		
+125	Strip Jack, The Black Book, Mortal Causes	Ian	Rankin	fiction	Rebus	english	0	2012	691	f		Three books in One
+126	Night Sins, Guilty as Sin, A Thin Dark Line	Tami	Hoag	fiction		english	-1	2012	1222	f		Three novels in one
+127	Kiowa Trail	Louis	Lamour	fiction		english	-1	2012	148	f		Very Old
+128	The Woods	Harlan	Coben	fiction		english	-1	-1	442	f		
+129	Play Dead	Harlan	Coben	fiction		english	-1	-1	518	f		
+130	Long Lost	Harlan	Coben	fiction		english	-1	2011	422	f		
+131	Miracle Cure	Harlan	Coben	fiction		english	-1	-1	470	f		
+132	Deliver Us from Evil	David	Baldacci	fiction		english	-1	2012	406	f		
+133	Split Second	David	Baldacci	fiction		english	-1	2011	496	f		
+134	The Christmas Train	David	Baldacci	fiction		english	-1	2011	296	f		
+136	Hide and Sneak	Franklin W	Dixon	fiction	The Hardy Boys	english	174	2011	135	f		
+135	Double Jeopardy	Franklin W	Dixon	fiction	The Hardy Boys	english	181	2011	150	f		
+137	Running on Fumes	Franklin W	Dixon	fiction	The Hardy Boys	english	-1	2011	150	f		Undercover Brothers series
+138	The Voodoo Plot	Franklin W	Dixon	fiction	The Hardy Boys	english	72	2010	189	f		
+139	The Mystery of the Missing Friends	Franklin W	Dixon	fiction	The Hardy Boys	english	32	2010	156	f		
+140	Deathgame	Franklin W	Dixon	fiction	The Hardy Boys	english	-1	2011	151	f		Casefiles Series
+141	Choke Hold	Franklin W	Dixon	fiction	The Hardy Boys	english	-1	2011	155	f		Casefiles Series
+142	The Brethren	John	Grisham	fiction		english	-1	2014	366	f		
+143	The Partnet	John	Grisham	fiction		english	-1	-1	366	f		
+144	American Tabloid	James	Ellroy	fiction		english	-1	-1	585	f		
+145	Sleep No More	Greg	Iles	fiction		english	-1	2011	466	f		
+146	The Seven Minutes	Irving	Wallace	fiction		english	-1	2014	630	f		
+147	The Winter King	Bernard	Cornwell	fiction	The Warlord Chronicles	english	1	-1	495	f		
+148	Rhythm of War	Brandon	Sanderson	fiction	The Stormlight Archive	english	4	2020	1230	f		
+149	Timespell	Robert N	Charrette	fiction	Chronicles of Aelwyn	english	1	2011	327	f		
+150	Off Armageddon Reef	David	Weber	fiction	The Safehold Series	english	3	2014	788	f		
+151	Mr X	Peter	Straub	fiction		english	-1	2010	510	f		
+152	The Best of Roald Dahl	Roald	Dahl	fiction		english	-1	2012	367	f		
+153	The Long Utopia	Terry	Pratchett	fiction	The Long Earth	english	4	-1	431	f		
+154	The Forbidden Tomb	Chris	Kuzneski	fiction		english	-1	2018	548	f		
+155	Chains of Command	Dale	Brown	fiction		english	-1	2010	500	f		
+156	The Exile	Allan	Folsom	fiction		english	-1	2011	690	f		
+157	Blood Work	Michael	Connelly	fiction		english	-1	2010	498	f		
+158	City of Bones	Cassandra	Clare	fiction	The Mortal Instruments	english	1	2014	442	f		
+159	Kane and Abel	Jeffrey	Archer	fiction		english	-1	-1	550	f		
+160	False Impression	Jeffrey	Archer	fiction		english	-1	-1	385	f		
+161	Traitor to the Blood	Barb	Hendee	fiction	The Noble Dead	english	4	-1	485	f		
+162	Aftermath	Peter	Robinson	fiction		english	-1	-1	515	f		
+163	The Hiding Place	John	Burley	fiction		english	-1	2018	362	f		
+164	The Shadow Rising	Robert	Jordan	fiction	The Wheel of Time	english	4	2021	1007	f		
+165	The Fires of Heaven	Robert	Jordan	fiction	The Wheel of Time	english	5	2021	907	f		
+166	Game of Thrones	George RR	Martin	fiction	A Song of Ice and Fire	english	1	-1	801	f		
+167	Eclipse	Stephenie	Meyer	fiction	Twilight	english	3	-1	628	f		
+168	Shadow Souls	LJ	Smith	fiction	Vampire Diaries The Return	english	3	-1	496	f		
+169	The Prophecies of Nostradamus	Erika	Cheetham	nonfiction		english	-1	2010	478	f		
+170	Angry River	Ruskin	Bond	fiction		english	-1	-1	88	f		
+171	Ponniyin Selvan 1	Kalki		nonfiction	Ponniyin Selvan	tamil	1	-1	-1	f		
+172	Ponniyin Selvan 2	Kalki		nonfiction	Ponniyin Selvan	tamil	2	-1	912	f		
+173	Ponniyin Selvan 4	Kalki		nonfiction	Ponniyin Selvan	tamil	4	-1	910	f		
+174	Ponniyin Selvan 5	Kalki		nonfiction	Ponniyin Selvan	tamil	5	-1	-1	f		
+175	Ponniyin Selvan 6	Kalki		nonfiction	Ponniyin Selvan	tamil	-1	-1	-1	f		
+176	Sivagamiyin Sabadham	Kalki		nonfiction		tamil	-1	-1	1054	f		
+177	Parthiban Kanavu	Kalki		fiction		tamil	-1	2010	344	f		
+178	Panniru Azhwargal	Ramanathan		nonfiction		tamil	-1	-1	144	f		
+179	Pathinen Puranangal	Gnanasambhandhan		nonfiction		tamil	-1	2012	752	f		
+180	Meendum Jeeno	Sujatha		fiction		tamil	-1	2010	328	f		
+181	En Iniya Enthira	Sujatha		fiction		tamil	-1	2010	278	f		
+182	Mayanilavu	Indira	Soundarrajan	fiction		tamil	-1	2016	320	f		
+183	Mullavin Vedikkai Kathaigal	Balamurugan		fiction		tamil	-1	-1	128	f		
+184	Mariyadhai Raman Kadhaigal			fiction		tamil	-1	-1	76	f		
+185	Mariyadhai Raman Kadhaigal			fiction		tamil	-1	-1	71	f		
+186	Vikramadityan Kadhaigal	Bharathan		fiction		tamil	-1	-1	293	f		
+187	Tenaliraman Kadhaigal			fiction		tamil	-1	-1	240	f		
+188	Tenaliraman Kadhaigal			fiction		tamil	-1	-1	96	f		
+189	Tenaliraman Kadhaigal			fiction		tamil	-1	-1	147	f		
+190	Tenaliraman Kadhaigal			fiction		tamil	-1	-1	55	f		
+191	Acupuncture 1	Mathiyazhagan		nonfiction	Acupuncture	tamil	1	2020	128	f		
+192	Uyir Acupuncture	Mathiyazhagan		nonfiction	Acupuncture	tamil	2	2021	128	f		
+193	Mana Acupuncture	Mathiyazhagan		nonfiction	Acupuncture	tamil	3	2021	112	f		
+194	Panchathantiram Kadhaigal			fiction		tamil	-1	2012	416	f		
+195	Bharathiyar Kadhaigal			nonfiction		tamil	-1	-1	440	f		
+196	Reiki and Sujok Acupressure	PS	Lalitha	nonfiction		english	-1	2020	-1	f		
+197	Mahaparivrajaka	Swami Paramanand	Bharati	nonfiction		english	-1	-1	228	f		
+198	Hindu Dharma			nonfiction		english	-1	-1	827	f		Given by Prabhu
+199	Unmai	KS Nagarajan	Raja	nonfiction		tamil	-1	-1	224	f		
+200	Mahabharatam	Vyasar		nonfiction		tamil	-1	-1	484	f		
+201	Sri Guru Charitram	V Kanakachandirayya		nonfiction		tamil	-1	-1	246	f		
+202	Sivamayam Kanda Siddhargal			nonfiction		tamil	-1	-1	344	f		
+203	Garuda Puranam	R Ponnammal		nonfiction		tamil	-1	-1	128	f		
+204	Kutumba Jothidam			nonfiction		tamil	-1	-1	242	f		
+205	Josiyam			nonfiction		tamil	-1	2012	304	f		
+206	Kairegai Jadagam Kanippadhu Eppidi?			nonfiction		tamil	-1	-1	111	f		
+207	Junior Classics Gullivers Travels	Jonathan	Swift	fiction		english	-1	2011	30	f		
+208	Junior Classics David Copperfield	Charles	Dickens	fiction		english	-1	2011	30	f		
+209	Junior Classics Frankenstein	Mary	Shelly	fiction		english	-1	2011	32	f		
+210	Junior Classics Treasure Island	Robert Louis 	Stevenson	fiction		english	-1	2011	32	f		
+211	Junior Classics The Jungle Book	Rudyard	Kipling	fiction		english	-1	2011	30	f		
+212	Harry Potter and the Cursed Child	JK	Rowling	fiction		english	-1	-1	343	f		
+213	Chitty Chitty Bang Bang Flies Again	Frank Cottrell	Boyce	fiction	Chitty Chitty Bang Bang	english	-1	-1	216	f		
+214	Memories of Midnight	Sidney	Sheldon	fiction		english	-1	-1	320	f		
+215	The Stars Shine Down	Sidney	Shedon	fiction		english	-1	-1	370	f		
+216	Rage of Angels	Sidney	Sheldon	fiction		english	-1	-1	504	f		
+217	If Tomorrow Comes	Sidney	Sheldon	fiction		english	-1	-1	408	t		
+218	Windmill of the Gods	Sidney	Sheldon	fiction		english	-1	-1	434	f		
+219	The Stars Shine Down	Sidney	Sheldon	fiction		english	-1	-1	370	f		
+\.
+
+
+--
+-- Data for Name: genres; Type: TABLE DATA; Schema: public; Owner: books_user
+--
+
+COPY public.genres (genre_id, genre) FROM stdin;
+1	mystery
+2	thriller
+3	fantasy
+4	mythology
+5	scifi
+6	romance
+7	crime
+8	psychological
+9	medical
+10	comdey
+11	satire
+12	philosophical
+13	classic
+14	surrealism
+15	spy
+16	political
+17	supernatural
+18	horror
+19	young-adult
+20	dystopian
+21	historical
+22	space opera
+23	sport
+24	west
+25	classic
+26	conspiracy
+27	techno
+28	absurdist
+29	misc.
+30	military
+31	religion
+32	children
+33	spiritual
+\.
+
+
+--
+-- Name: bookgenres_book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: books_user
+--
+
+SELECT pg_catalog.setval('public.bookgenres_book_id_seq', 1, false);
+
+
+--
+-- Name: bookgenres_genre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: books_user
+--
+
+SELECT pg_catalog.setval('public.bookgenres_genre_id_seq', 1, false);
+
+
+--
+-- Name: books_book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: books_user
+--
+
+SELECT pg_catalog.setval('public.books_book_id_seq', 1, false);
+
+
+--
+-- Name: genres_genre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: books_user
+--
+
+SELECT pg_catalog.setval('public.genres_genre_id_seq', 1, false);
+
+
+--
+-- Name: bookgenres bookgenres_pkey; Type: CONSTRAINT; Schema: public; Owner: books_user
+--
+
+ALTER TABLE ONLY public.bookgenres
+    ADD CONSTRAINT bookgenres_pkey PRIMARY KEY (book_id, genre_id);
+
+
+--
+-- Name: books books_pkey; Type: CONSTRAINT; Schema: public; Owner: books_user
+--
+
+ALTER TABLE ONLY public.books
+    ADD CONSTRAINT books_pkey PRIMARY KEY (book_id);
+
+
+--
+-- Name: genres genres_pkey; Type: CONSTRAINT; Schema: public; Owner: books_user
+--
+
+ALTER TABLE ONLY public.genres
+    ADD CONSTRAINT genres_pkey PRIMARY KEY (genre_id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

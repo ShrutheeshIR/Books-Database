@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.4/css/bootstrap-theme.min.css"> -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+    
+          </head>
+  <body>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Books Catalogue</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <form action="/addTask" method="POST" id="bookform">
+
+
+          <input type="text" class="form-control" name="bookName" value="" placeholder="Name of Book"/>
+          <input type="text" class="form-control" name="authorFirstName" value="" placeholder="First Name of Author"/>
+          <input type="text" class="form-control" name="authorLastName" value="" placeholder="Last Name of Author"/>
+          
+          <label for="type">Fiction/Non-Fiction:</label>
+          <select name="type" id="type">
+            <option value="fiction">Fiction</option>
+            <option value="nonfiction">Non-Fiction</option>
+          </select>
+          <br> 
+
+          <label for="lang">Select language:</label>
+          <select name="lang" id="lang">
+            <option value="english">English</option>
+            <option value="tamil">Tamil</option>
+            <option value="hindi">Hindi</option>
+            <option value="sanskrit">Sanskrit</option>
+            <option value="other">Other</option>
+          </select>
+          <br> 
+        
+          <label for="genres">Select Genres:</label>
+        <input type="hidden" name="genre" />
+          <select name ="genres" id="genres" multiple="multiple" onchange="DropDownChanged(this);">
+            <% for(var i = 0; i <genres.length; i++){%>
+              <option id=<%= genres[i].genre_id %> value=<%= genres[i].genre_id %>><%= genres[i].genre %></option>
+            <%} %>
+            <option id="other" value=-1>Other..</option>
+          </select>
+        <input type="text" name="genres_extra" style="display: none;" placeholder="Enter genres comma separated with space" />
+
+        <br> 
+          <label for="seriesName">Series Name:</label>
+          <input type="text" class="form-control" name="seriesName" value="" placeholder="seriesname"/>
+
+          <label for="seriesName">Book Number in the Series:</label>
+          <input type="number" class="form-control" name="seriesNo" value=-1 placeholder="Book Number in the Series"/>
+
+          <label for="year">Year of Purchase:</label>
+          <input type="number" class="form-control" name="year" value=-1 placeholder="Year of Publication"/>
+
+          <label for="pages">Pages:</label>
+          <input type="number" class="form-control" name="pages" value=-1 placeholder="Number of pages in the book"/>
+
+          <label for="duplicate">Original/Duplicate:</label>
+          <select name="duplicate" id="duplicate">
+            <option value="FALSE">Original</option>
+            <option value="TRUE">Duplicate</option>
+          </select>
+          <br> 
+
+          <input type="text" class="form-control" name="photo" value="" placeholder="PhotoPath"/>
+
+          <textarea rows="4" cols="50" name="comments" form="bookform" placeholder="Enter Comments here"></textarea>
+
+          <button type="submit" class="btn btn-md btn-default" >
+            ADD
+          </button>
+
+
+        </form>
+      </div>
+
+      <form action="/showPreviousEntry" method="GET">
+        <button type="submit" class="btn btn-md btn-default" >
+            SHOWPREV
+          </button>
+        </form>
+      
+      
+    </div>
+
+
+
+  <script>
+
+
+
+$(document).ready(function() {
+      $('#genres').multiselect({
+        includeSelectAllOption: true,
+      });
+  });
+
+  function DropDownChanged(oDDL) {
+        var oTextbox = oDDL.form.elements["genres_extra"];
+        if( document.getElementById('other').selected){
+          oTextbox.style.display = "";
+        }
+        else
+          oTextbox.style.display = "none";
+        oTextbox.focus();
+    }
+
+
+    
+    
+  </script>    
+
+  </body>
+</html>
